@@ -287,37 +287,39 @@ function initApp(){
   [autoDayEl, autoAmtEl, autoNoteEl].forEach(el=>el.addEventListener('change',saveAuto));
 
   function applyAutoDebit(){
-    const auto=localStorage.getItem(AUTO_KEY); if(!auto)return;
-    const { day, amount, note }=JSON.parse(auto); if(!day||!amount)return;
-    let lastStr=localStorage.getItem(LAST_AUTO_KEY); let lastDate=lastStr?new Date(lastStr):null;
-    const today=new Date();
-    let startMonth = lastDate?new Date(lastDate.getFullYear(), lastDate.getMonth(), 1): new Date(today.getFullYear(), today.getMonth(), 1);
-    const monthsToApply=[];
+  const auto=localStorage.getItem(AUTO_KEY); 
+  if(!auto)return;
+  const { day, amount, note } = JSON.parse(auto); 
+  if(!day || !amount) return;
 
-    for(let d=new Date(startMonth); d<=new Date(today.getFullYear(), today.getMonth(), 1); d.setMonth(d.getMonth()+1)){
-      monthsToApply.push(new Date(d.getFullYear(), d.getMonth(), 1));
-    }
+  const today = new Date();
+  const thisMonthStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0');
 
-    monthsToApply.forEach(m=>{
-      const txDate=new Date(m.getFullYear(), m.getMonth(), day);
-      if(txDate>today)return;
-      const exists=transactions.some(t=>t.type==='debit'&&t.note===note&&t.date===txDate.toISOString().slice(0,10));
-      if(!exists){
-        transactions.push({
-          id:'tx_'+Date.now()+Math.random(),
-          date:txDate.toISOString().slice(0,10),
-          type:'debit',
-          amount:parseFloat(amount).toFixed(2),
-          note: note||'Авто-списання'
-        });
-      }
+  // Перевіряємо, чи вже списано цього місяця
+  const alreadyDebited = transactions.some(t=>{
+    return t.type==='debit' && t.note===note && t.date.startsWith(thisMonthStr);
+  });
+
+  if(!alreadyDebited){
+    // Створюємо запис на поточний місяць
+    const debitDate = new Date(today.getFullYear(), today.getMonth(), day);
+    const isoDate = debitDate.toISOString().slice(0,10);
+
+    transactions.push({
+      id:'tx_'+Date.now(),
+      date: isoDate,
+      type:'debit',
+      amount: parseFloat(amount).toFixed(2),
+      note: note || 'Авто-списання'
     });
+
     save();
-    localStorage.setItem(LAST_AUTO_KEY, new Date().toISOString());
   }
+}
 
   load();
 }
 </script>
 </body>
 </html>
+

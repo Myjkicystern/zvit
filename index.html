@@ -4,57 +4,49 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>Облік зарплати</title>
-<meta name="theme-color" content="#0c4a6e">
+<meta name="theme-color" content="#0f172a">
 <style>
-:root{
-  font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;
-  color:#0c4a6e;
-}
-*{box-sizing:border-box;}
-html,body{height:100%;margin:0;padding:0;background:#e0f2fe;}
-.app{width:100%;padding:12px;position:relative;}
-header{position:sticky;top:0;background:linear-gradient(180deg,#0c4a6e,rgba(12,74,110,0.95));color:#fff;padding:14px;border-radius:10px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);}
-header h1{font-size:18px;margin:0 0 6px;}
-.balance-row{display:flex;align-items:center;gap:8px;transition:0.5s;}
-.balance{font-size:20px;font-weight:700;}
-.muted{opacity:.9;font-size:13px;}
-.tabs{display:flex;gap:8px;margin-bottom:10px;overflow-x:auto;}
-.tab{flex:1;text-align:center;padding:8px 0;border-radius:10px;background:#bae6fd;color:#0c4a6e;font-weight:700;cursor:pointer;transition:0.2s;white-space:nowrap;}
-.tab.active{background:#0c4a6e;color:#fff;}
-.card{background:#fff;border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(2,6,23,.06);transition:0.3s;margin-bottom:10px;}
-.card:hover{box-shadow:0 8px 24px rgba(2,6,23,.12);}
-form{display:flex;flex-wrap:wrap;gap:8px;}
-label{display:block;font-size:13px;color:#334155;width:100%;}
-input[type="date"], input[type="number"], select, input[type="text"], input[type="password"]{width:100%;padding:12px;border-radius:10px;border:1px solid #0c4a6e;font-size:15px;transition:0.2s;}
-input:focus{outline:none;border-color:#0284c7;box-shadow:0 0 6px rgba(2,132,199,0.3);}
-.full{width:100%;}
-.actions{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;width:100%;}
+:root{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;color:#0f172a}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;padding:0;background:#e0f2fe}
+.app{max-width:720px;margin:0 auto;padding:12px;position:relative}
+header{position:sticky;top:0;background:linear-gradient(180deg,#0284c7,#0ea5e9);color:#fff;padding:14px;border-radius:10px;margin-bottom:10px;z-index:10}
+header h1{font-size:18px;margin:0 0 6px}
+.balance-row{display:flex;align-items:center;gap:8px}
+.balance{font-size:20px;font-weight:700}
+.muted{opacity:.9;font-size:13px}
+.tabs{display:flex;gap:8px;margin-bottom:10px}
+.tab{flex:1;text-align:center;padding:8px 0;border-radius:10px;background:#bae6fd;color:#0f172a;font-weight:700;cursor:pointer}
+.tab.active{background:#0284c7;color:#fff}
+.card{background:#fff;border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(2,6,23,.06)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+label{display:block;font-size:13px;color:#334155}
+input[type="date"], input[type="number"], select, input[type="text"], input[type="password"]{width:100%;padding:12px;border-radius:10px;border:1px solid #e2e8f0;font-size:15px}
+.full{grid-column:1 / -1}
+.actions{display:flex;gap:8px;align-items:center;justify-content:center}
 button {padding:8px 16px;font-size:15px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.15);transition:transform 0.1s, box-shadow 0.1s;cursor:pointer;}
 button:hover {transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,0.2);}
-.btn-primary { background: #0c4a6e; color: #fff; border:none; }
-.btn-ghost { background: #fff; border: 1px solid #0c4a6e; color: #0c4a6e; }
-.btn-danger { background: #dc2626; color: #fff; border:none; }
-.small{font-size:13px;color:#64748b;}
-#loginScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center;padding:20px;}
-#loginScreen input{margin-bottom:10px;width:80%;max-width:300px;}
-footer{position:fixed;bottom:8px;width:100%;text-align:center;font-size:13px;color:rgba(15,23,42,0.5);font-weight:600;pointer-events:none;transition:0.3s;opacity:0.7;}
-footer:hover{opacity:1;}
-.tx-cards{display:flex;flex-direction:column;gap:8px;max-height:50vh;overflow-y:auto;width:100%;}
-.tx-card{padding:12px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);background:#fff;display:flex;flex-direction:column;transition:0.3s;opacity:0;transform:translateY(20px);}
-.tx-card.show{opacity:1;transform:translateY(0);}
+.btn-primary { background: #0284c7; color: #fff; }
+.btn-ghost { background: #fff; border: 1px solid #0284c7; color: #0284c7; }
+.btn-danger { background:#ef4444; color:#fff; }
+.small{font-size:13px;color:#64748b}
+#loginScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center;padding:20px}
+#loginScreen input{margin-bottom:10px;width:80%;max-width:300px}
+footer{position:fixed;bottom:8px;width:100%;text-align:center;font-size:13px;color:rgba(15,23,42,0.5);font-weight:600;pointer-events:none;transition:0.3s;opacity:0.7}
+footer:hover{opacity:1}
+/* Картки транзакцій для мобільних */
+.tx-cards{display:flex;flex-direction:column;gap:8px;max-height:50vh;overflow-y:auto;}
+.tx-card{padding:12px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);background:#fff;display:flex;flex-direction:column;}
 .tx-card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
 .tx-card .top .date{font-size:13px;color:#64748b;}
 .tx-card .top .amount{font-weight:700;font-size:16px;}
 .tx-card .type-badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:600;color:#fff;margin-bottom:4px;}
-.type-earned{background:#0284c7;}
+.type-earned{background:#0369a1;}
 .type-credit{background:#0ea5e9;}
 .type-debit{background:#7c2d12;}
-@media (max-width:520px){
-  header {border-radius:0;}
-  .balance {font-size:18px;}
-  input, select, button {width:100%;}
-  .actions {flex-direction:column;}
-}
+.tx-card .note{font-size:14px;color:#334155;}
+.tx-card button{align-self:flex-end;margin-top:6px;padding:4px 8px;font-size:13px;}
+@media (max-width:520px){form{grid-template-columns:1fr} header{border-radius:0} .app{padding:10px} .balance{font-size:18px}}
 </style>
 </head>
 <body>
@@ -66,7 +58,7 @@ footer:hover{opacity:1;}
 
 <div class="app" id="mainApp" style="display:none">
   <header>
-    <h1>Облік зарплати на LiMaSo_trans</h1>
+    <h1>Облік зарплати на LiMaSo Trans</h1>
     <div class="balance-row">
       <div class="balance">Залишок: <span id="balance">0.00</span> UAH</div>
     </div>
@@ -80,6 +72,7 @@ footer:hover{opacity:1;}
     <div class="tab" id="tabSettings">Налаштування</div>
   </div>
 
+  <!-- Транзакції -->
   <div id="txContent">
     <div class="card">
       <form id="txForm">
@@ -92,6 +85,7 @@ footer:hover{opacity:1;}
           </select>
         </label>
         <label>Сума (UAH)<input id="amount" type="number" step="0.01" min="0" required></label>
+        <label>Комісія (UAH)<input id="commission" type="number" step="0.01" min="0" value="0"></label>
         <label>Опис<input id="note" type="text" placeholder="Наприклад: зарплата, аванс, штраф"></label>
         <div class="full actions">
           <button id="addBtn" type="submit" class="btn-primary">Додати запис</button>
@@ -102,34 +96,29 @@ footer:hover{opacity:1;}
     </div>
   </div>
 
+  <!-- Авто-списання -->
   <div id="autoContent" style="display:none">
-    <div class="card" style="background:linear-gradient(135deg,#cffafe,#bae6fd);">
-      <h2 style="color:#0c4a6e;margin-bottom:12px">Авто-списання</h2>
-      <div style="display:flex;flex-wrap:wrap;gap:12px;">
-        <div style="flex:1;min-width:120px;">
-          <label>День місяця</label>
-          <input type="number" id="autoDebitDay" min="1" max="31" placeholder="1-31">
-        </div>
-        <div style="flex:1;min-width:120px;">
-          <label>Сума</label>
-          <input type="number" id="autoDebitAmount" step="0.01" min="0" placeholder="UAH">
-        </div>
-        <div style="flex:2;min-width:180px;">
-          <label>Опис</label>
-          <input type="text" id="autoDebitNote" placeholder="Наприклад: комунальні">
-        </div>
+    <div class="card">
+      <label>Щомісячне авто-списання (виберіть день):
+        <input type="number" id="autoDebitDay" min="1" max="31" placeholder="1-31" style="width:48%;display:inline-block">
+      </label>
+      <label>Сума <input type="number" id="autoDebitAmount" step="0.01" min="0" placeholder="UAH" style="width:48%;display:inline-block"></label>
+      <label>Опис <input type="text" id="autoDebitNote" placeholder="Наприклад: комунальні"></label>
+      <div class="small muted" style="margin-bottom:10px">Авто-списання відбувається один раз на місяць у вибраний день.</div>
+      <div class="actions">
+        <button id="saveAutoBtn" class="btn-primary">Зберегти налаштування</button>
+        <span id="autoSavedMsg" class="small" style="opacity:0;transition:0.5s;margin-left:10px">Збережено!</span>
       </div>
-      <button id="saveAutoBtn" class="btn-primary" style="margin-top:12px;">Зберегти авто-списання</button>
-      <div id="autoSavedMsg" class="small" style="color:#0c4a6e;margin-top:6px;opacity:0;transition:opacity 0.3s;">Збережено!</div>
     </div>
   </div>
 
+  <!-- Статистика -->
   <div id="statsContent" style="display:none">
     <div class="card">
       <h2>Статистика по місяцях</h2>
       <div class="table-wrap">
         <table id="statsTable">
-          <thead><tr><th>Місяць</th><th>Зароблено</th><th>Нарахування</th><th>Списання</th><th>Баланс</th></tr></thead>
+          <thead><tr><th>Місяць</th><th>Зароблено</th><th>Нарахування</th><th>Списання</th><th>Баланс</th><th>Комісія</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -137,6 +126,7 @@ footer:hover{opacity:1;}
     </div>
   </div>
 
+  <!-- Налаштування -->
   <div id="settingsContent" style="display:none">
     <div class="card">
       <h2>Налаштування</h2>
@@ -155,8 +145,7 @@ footer:hover{opacity:1;}
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-// === JS код із всіх функцій ===
-const STORAGE_KEY='payroll_manual_single_person_pwa_v8';
+const STORAGE_KEY='payroll_manual_single_person_pwa_v9';
 const PASS_KEY='payroll_pass';
 const AUTO_KEY='auto_debit';
 const LAST_AUTO_KEY='last_auto';
@@ -183,6 +172,7 @@ function initApp(){
   const typeEl=document.getElementById('type');
   const amountEl=document.getElementById('amount');
   const noteEl=document.getElementById('note');
+  const commissionEl=document.getElementById('commission');
   const txCards=document.querySelector('.tx-cards');
   const balanceEl=document.getElementById('balance');
   const clearBtn=document.getElementById('clearBtn');
@@ -245,7 +235,11 @@ function initApp(){
         <div class="type-badge ${cls}">${label}</div>
         <div class="top"><div class="date">${dt}</div><div class="amount">${sign} ${Number(t.amount).toFixed(2)} UAH</div></div>
         <div class="note">${escapeHtml(t.note||'')}</div>
-        <button class="del btn-ghost" data-id="${t.id}">Видалити</button>
+        ${t.type==='credit'?`<div class="small">Комісія: ${t.commission} UAH</div>`:''}
+        <div class="actions">
+          <button class="edit btn-ghost" data-id="${t.id}">Редагувати</button>
+          <button class="del btn-ghost" data-id="${t.id}">Видалити</button>
+        </div>
       `;
       txCards.appendChild(card);
     }
@@ -254,9 +248,10 @@ function initApp(){
   function renderStats(){
     const stats={};
     for(const t of transactions){
-      const m=t.date.slice(0,7);
-      if(!stats[m])stats[m]={earned:0,credit:0,debit:0};
-      stats[m][t.type]+=Number(t.amount);
+      const m = t.date.slice(0,7);
+      if(!stats[m]) stats[m]={earned:0,credit:0,debit:0,commission:0};
+      stats[m][t.type] += Number(t.amount);
+      stats[m].commission += t.type==='credit'?Number(t.commission||0):0;
     }
     statsTableBody.innerHTML='';
     const labels=Object.keys(stats).sort();
@@ -265,29 +260,39 @@ function initApp(){
       const e=stats[m].earned,c=stats[m].credit,d=stats[m].debit,b=e-c-d;
       earnedData.push(e);creditData.push(c);debitData.push(d);
       const tr=document.createElement('tr');
-      tr.innerHTML=`<td>${m}</td><td>${e.toFixed(2)}</td><td>${c.toFixed(2)}</td><td>${d.toFixed(2)}</td><td>${b.toFixed(2)}</td>`;
+      tr.innerHTML=`<td>${m}</td><td>${e.toFixed(2)}</td><td>${c.toFixed(2)}</td><td>${d.toFixed(2)}</td><td>${b.toFixed(2)}</td><td>${stats[m].commission.toFixed(2)}</td>`;
       statsTableBody.appendChild(tr);
     }
     if(statsChart){statsChart.destroy();}
-    statsChart=new Chart(statsChartEl,{type:'bar',data:{labels:labels,datasets:[{label:'Зароблено',data:earnedData,backgroundColor:'#0284c7'},{label:'Нарахування',data:creditData,backgroundColor:'#0ea5e9'},{label:'Списання',data:debitData,backgroundColor:'#7c2d12'}]},options:{responsive:true,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true}}}});
+    statsChart=new Chart(statsChartEl,{type:'bar',data:{labels:labels,datasets:[{label:'Зароблено',data:earnedData,backgroundColor:'#0369a1'},{label:'Нарахування',data:creditData,backgroundColor:'#0ea5e9'},{label:'Списання',data:debitData,backgroundColor:'#7c2d12'}]},options:{responsive:true,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true}}}});
   }
 
   document.getElementById('txForm').addEventListener('submit',(e)=>{
     e.preventDefault();
-    const date=dateEl.value,type=typeEl.value,amount=parseFloat(amountEl.value),note=noteEl.value.trim();
-    if(!date||isNaN(amount)||amount<=0)return;
-    const tx={id:'tx_'+Date.now(),date,type,amount:amount.toFixed(2),note};
+    const date = dateEl.value,
+          type = typeEl.value,
+          amount = parseFloat(amountEl.value),
+          note = noteEl.value.trim(),
+          commission = parseFloat(commissionEl.value) || 0;
+    if(!date || isNaN(amount) || amount<=0) return;
+    const tx={id:'tx_'+Date.now(),date,type,amount:amount.toFixed(2),note,commission:type==='credit'?commission.toFixed(2):'0'};
     transactions.push(tx); save(); render();
-    amountEl.value=''; noteEl.value='';
+    amountEl.value=''; noteEl.value=''; commissionEl.value='0';
   });
 
-  txCards.addEventListener('click',(e)=>{
-    if(e.target.classList.contains('del')){
-      const id=e.target.dataset.id;
+  txCards.addEventListener('click', function(e){
+    let target = e.target.closest('button');
+    if(!target) return;
+    const id = target.dataset.id;
+    const tx = transactions.find(t=>t.id===id);
+    if(target.classList.contains('del')){
       if(confirm('Видалити запис?')){
-        transactions=transactions.filter(t=>t.id!==id);
-        save(); render();
+        transactions = transactions.filter(t => t.id !== id); save(); render();
       }
+    } else if(target.classList.contains('edit')){
+      if(!tx) return;
+      dateEl.value = tx.date; typeEl.value = tx.type; amountEl.value = tx.amount; noteEl.value = tx.note; commissionEl.value = tx.commission || 0;
+      transactions = transactions.filter(t => t.id !== id); save(); render();
     }
   });
 
@@ -311,8 +316,7 @@ function initApp(){
     const key=`${today.getFullYear()}-${today.getMonth()+1}-${autoData.day}`;
     if(todayDay==autoData.day && lastAuto!==key){
       transactions.push({id:'tx_'+Date.now(),date:today.toISOString().slice(0,10),type:'debit',amount:Number(autoData.amount).toFixed(2),note:autoData.note||'Авто-списання'});
-      localStorage.setItem(LAST_AUTO_KEY,key);
-      save();
+      localStorage.setItem(LAST_AUTO_KEY,key); save();
     }
   }
 

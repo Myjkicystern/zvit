@@ -10,76 +10,54 @@
 :root{--primary:#0ea5e9;--primary-dark:#0369a1;--secondary:#7dd3fc;--bg:#f0f9ff;--text:#0f172a;--muted:#64748b;--card:#fff;}
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;height:100%;background:var(--bg);font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);}
-.app{max-width:720px;margin:0 auto;padding:12px;position:relative;}
-header{position:sticky;top:0;background:linear-gradient(180deg,var(--primary-dark),rgba(14,165,233,0.95));color:#fff;padding:14px;border-radius:10px;margin-bottom:10px;z-index:10;}
-header h1{font-size:18px;margin:0 0 6px;}
-.balance-row{display:flex;align-items:center;gap:8px;}
-.balance{font-size:20px;font-weight:700;}
-.muted{opacity:.9;font-size:13px;}
-.tabs{display:flex;gap:8px;margin-bottom:10px;justify-content:space-around;}
-.tab{flex:1;text-align:center;padding:8px 0;border-radius:10px;background:#e2e8f0;color:var(--text);font-weight:700;cursor:pointer;}
+.app{max-width:480px;margin:0 auto;padding:8px;position:relative;}
+header{position:sticky;top:0;background:linear-gradient(180deg,var(--primary-dark),rgba(14,165,233,0.95));color:#fff;padding:12px;border-radius:10px;margin-bottom:8px;z-index:10;}
+header h1{font-size:16px;margin:0 0 4px;}
+.balance-row{display:flex;align-items:center;gap:4px;}
+.balance{font-size:18px;font-weight:700;}
+.muted{opacity:.9;font-size:12px;}
+.tabs{display:flex;gap:4px;margin-bottom:8px;justify-content:space-around;}
+.tab{flex:1;text-align:center;padding:6px 0;border-radius:10px;background:#e2e8f0;color:var(--text);font-weight:700;cursor:pointer;}
 .tab.active{background:var(--primary-dark);color:#fff;}
-.card{background:var(--card);border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(2,6,23,.06);margin-bottom:10px;transition:all 0.3s;}
-form{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-label{display:block;font-size:13px;color:#334155;}
-input[type="date"], input[type="number"], select, input[type="text"], input[type="password"]{width:100%;padding:12px;border-radius:10px;border:1px solid #e2e8f0;font-size:15px;}
+.card{background:var(--card);border-radius:12px;padding:8px;box-shadow:0 4px 12px rgba(2,6,23,.06);margin-bottom:8px;transition:all 0.3s;}
+form{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+label{display:block;font-size:12px;color:#334155;}
+input[type="date"], input[type="number"], select, input[type="text"], input[type="password"]{width:100%;padding:10px;border-radius:8px;border:1px solid #e2e8f0;font-size:14px;}
 .full{grid-column:1 / -1;}
-.actions{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;}
-button{padding:8px;display:flex;align-items:center;justify-content:center;font-size:16px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.15);transition:transform 0.1s, box-shadow 0.1s;cursor:pointer;border:none;}
-button:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,0.2);}
+.actions{display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap;}
+button{padding:6px;display:flex;align-items:center;justify-content:center;font-size:14px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.15);transition:transform 0.1s, box-shadow 0.1s;cursor:pointer;border:none;width:36px;height:36px;}
+button:hover{transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,0,0.2);}
 .btn-primary{background:var(--primary-dark);color:#fff;}
 .btn-ghost{background:#fff;border:1px solid var(--primary-dark);color:var(--primary-dark);}
 .btn-danger{background:#dc2626;color:#fff;}
 .icon-btn i{pointer-events:none;}
-.small{font-size:13px;color:var(--muted);}
-#loginScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center;padding:20px;}
-#loginScreen input{margin-bottom:10px;width:80%;max-width:300px;}
-footer{position:fixed;bottom:8px;width:100%;text-align:center;font-size:13px;color:rgba(15,23,42,0.5);font-weight:600;pointer-events:none;transition:0.3s;opacity:0.7;}
+.small{font-size:11px;color:var(--muted);}
+#loginScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center;padding:16px;}
+#loginScreen input{margin-bottom:8px;width:80%;max-width:260px;}
+footer{position:fixed;bottom:4px;width:100%;text-align:center;font-size:12px;color:rgba(15,23,42,0.5);font-weight:600;pointer-events:none;transition:0.3s;opacity:0.7;}
 footer:hover{opacity:1;}
-.tx-cards{display:flex;flex-direction:column;gap:8px;max-height:50vh;overflow-y:auto;transition:all 0.3s;}
-.tx-card{padding:12px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);background:var(--card);display:flex;flex-direction:column;transition:all 0.3s;}
-.tx-card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.tx-card .top .date{font-size:13px;color:var(--muted);}
-.tx-card .top .amount{font-weight:700;font-size:16px;}
-.tx-card .type-badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:600;color:#fff;margin-bottom:4px;}
+.tx-cards{display:flex;flex-direction:column;gap:6px;max-height:45vh;overflow-y:auto;transition:all 0.3s;}
+.tx-card{padding:8px;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,0.1);background:var(--card);display:flex;flex-direction:column;transition:all 0.3s;font-size:13px;}
+.tx-card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.tx-card .top .date{font-size:12px;color:var(--muted);}
+.tx-card .top .amount{font-weight:700;font-size:14px;}
+.tx-card .type-badge{display:inline-block;padding:3px 6px;border-radius:999px;font-size:11px;font-weight:600;color:#fff;margin-bottom:2px;}
 .type-earned{background:#0369a1;}
 .type-credit{background:#0ea5e9;}
 .type-debit{background:#7c2d12;}
-.tx-card .note{font-size:14px;color:#334155;}
-.tx-card button{margin-top:6px;}
-.tx-collapse-body{display:none;transition:all 0.3s;}
-.tx-collapse-body.show{display:grid;}
-#statsContent .card {
-  max-height: 60vh; /* обмеження висоти на 60% від висоти екрана */
-  overflow-y: auto;  /* вертикальна прокрутка */
-  padding: -5px;
-}
-#statsTable {
-  font-size: 2px;
-  width: 100%;
-}
-
-#statsTable th, #statsTable td {
-  padding: 4px 6px;
-  font-size: 12px;
-}
-
-@media (max-width:520px){
-  #statsTable, #statsTable th, #statsTable td {
-    font-size: 6px;
-    padding: 2px 4px;
-  }
-}
-#statsChart {
-  max-height: 150px !important;
-}
+.tx-card .note{font-size:12px;color:#334155;}
+.tx-collapse-body{display:grid;transition:all 0.3s;}
+#statsContent .card { max-height:55vh; overflow-y: auto; padding: -5px;}
+#statsTable { font-size:10px; width:100%; border-collapse: collapse;}
+#statsTable th, #statsTable td { padding:2px 4px; border:1px solid #e2e8f0; }
+#statsChart { max-height:130px !important; width:100%; }
 </style>
 </head>
 <body>
 <div id="loginScreen">
   <h2>Вхід у систему</h2>
-  <input type="password" id="passwordInput" placeholder="Введіть пароль або створіть новий">
-  <button id="loginBtn" class="btn-primary">Увійти</button>
+  <input type="password" id="passwordInput" placeholder="Введіть пароль">
+  <button id="loginBtn" class="btn-primary"><i class="fa fa-right-to-bracket"></i></button>
 </div>
 
 <div class="app" id="mainApp" style="display:none">
@@ -88,7 +66,7 @@ footer:hover{opacity:1;}
     <div class="balance-row">
       <div class="balance">Залишок: <span id="balance">0.00</span> UAH</div>
     </div>
-    <div class="small muted">Баланс = Зароблено − Нарахування − Списання • Працює офлайн</div>
+    <div class="small muted">Баланс = Зароблено − Нарахування − Списання</div>
   </header>
 
   <div class="tabs">
@@ -98,71 +76,63 @@ footer:hover{opacity:1;}
     <div class="tab" id="tabSettings"><i class="fa fa-cog"></i></div>
   </div>
 
-  <!-- Транзакції -->
+  <!-- TRANSACTIONS -->
   <div id="txContent">
     <div class="card">
-      <div id="txCollapseHeader" style="cursor:pointer"><i class="fa fa-chevron-down"></i> Транзакції</div>
-      <div id="txCollapseBody" class="tx-collapse-body">
+      <div id="txCollapseHeader" style="cursor:pointer"><i class="fa fa-chevron-down"></i> Додати транзакцію</div>
+      <div id="txFormContainer" class="tx-collapse-body">
         <form id="txForm">
           <label>Дата<input id="date" type="date" required></label>
-          <label>Тип
-            <select id="type">
-              <option value="earned">Зароблено</option>
-              <option value="credit">Нарахування</option>
-              <option value="debit">Списання</option>
-            </select>
-          </label>
-          <label>Сума (UAH)<input id="amount" type="number" step="0.01" min="0" required></label>
+          <label>Тип<select id="type"><option value="earned">Зароблено</option><option value="credit">Нарахування</option><option value="debit">Списання</option></select></label>
+          <label>Сума<input id="amount" type="number" step="0.01" min="0" required></label>
           <label>Комісія<input id="commission" type="number" step="0.01" min="0" value="0"></label>
-          <label>Опис<input id="note" type="text" placeholder="Наприклад: зарплата, аванс, штраф"></label>
+          <label>Опис<input id="note" type="text" placeholder="Наприклад: зарплата"></label>
           <div class="full actions">
-            <button id="addBtn" class="icon-btn btn-primary" title="Додати"><i class="fa fa-plus"></i></button>
-            <button id="clearBtn" class="icon-btn btn-danger" title="Очистити всі"><i class="fa fa-trash"></i></button>
+            <button id="addBtn" class="btn-primary"><i class="fa fa-plus"></i></button>
+            <button id="clearBtn" class="btn-danger"><i class="fa fa-trash"></i></button>
           </div>
         </form>
-        <div class="tx-cards"></div>
       </div>
+      <div class="tx-cards"></div>
     </div>
   </div>
 
-  <!-- Авто-списання -->
+  <!-- AUTO DEBIT -->
   <div id="autoContent" style="display:none">
     <div class="card">
       <h2>Авто-списання</h2>
-      <label>День місяця<input type="number" id="autoDebitDay" min="1" max="31"></label>
+      <label>День<input type="number" id="autoDebitDay" min="1" max="31"></label>
       <label>Сума<input type="number" id="autoDebitAmount" step="0.01" min="0"></label>
-      <label>Опис<input type="text" id="autoDebitNote" placeholder="Наприклад: комунальні"></label>
+      <label>Опис<input type="text" id="autoDebitNote"></label>
       <div class="actions">
-        <button id="saveAutoBtn" class="icon-btn btn-primary" title="Зберегти"><i class="fa fa-save"></i></button>
+        <button id="saveAutoBtn" class="btn-primary"><i class="fa fa-save"></i></button>
       </div>
       <div id="autoSavedMsg" class="small muted" style="opacity:0;transition:0.3s">Збережено</div>
     </div>
   </div>
 
-  <!-- Статистика -->
+  <!-- STATISTICS -->
   <div id="statsContent" style="display:none">
     <div class="card">
-      <h2>Статистика по місяцях</h2>
-      <div class="table-wrap">
-        <table id="statsTable">
-          <thead><tr><th>Місяць</th><th>Зароблено</th><th>Нарахування</th><th>Списання</th><th>Баланс</th><th>Комісія</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <canvas id="statsChart" style="width:100%;max-height:300px;margin-top:12px"></canvas>
+      <h2>Статистика</h2>
+      <table id="statsTable">
+        <thead><tr><th>Місяць</th><th>Зароблено</th><th>Нарахування</th><th>Списання</th><th>Баланс</th><th>Комісія</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <canvas id="statsChart"></canvas>
     </div>
   </div>
 
-  <!-- Налаштування -->
+  <!-- SETTINGS -->
   <div id="settingsContent" style="display:none">
     <div class="card">
       <h2>Налаштування</h2>
-      <label>Старий пароль<input id="oldPass" type="password" placeholder="Старий пароль"></label>
-      <label>Новий пароль<input id="newPass" type="password" placeholder="Новий пароль"></label>
+      <label>Старий пароль<input id="oldPass" type="password"></label>
+      <label>Новий пароль<input id="newPass" type="password"></label>
       <div class="actions full">
-        <button id="changePassBtn" class="icon-btn btn-primary" title="Змінити пароль"><i class="fa fa-key"></i></button>
-        <button id="logoutBtn" class="icon-btn btn-ghost" title="Вийти"><i class="fa fa-right-from-bracket"></i></button>
-        <button id="resetAllBtn" class="icon-btn btn-danger" title="Обнулити всі дані"><i class="fa fa-ban"></i></button>
+        <button id="changePassBtn" class="btn-primary"><i class="fa fa-key"></i></button>
+        <button id="logoutBtn" class="btn-ghost"><i class="fa fa-right-from-bracket"></i></button>
+        <button id="resetAllBtn" class="btn-danger"><i class="fa fa-ban"></i></button>
       </div>
     </div>
   </div>
@@ -236,7 +206,7 @@ const saveAutoBtn=document.getElementById('saveAutoBtn');
 const autoSavedMsg=document.getElementById('autoSavedMsg');
 
 const txCollapseHeader=document.getElementById('txCollapseHeader');
-const txCollapseBody=document.getElementById('txCollapseBody');
+const txFormContainer=document.getElementById('txFormContainer');
 
 let transactions=[];
 let statsChart;
@@ -299,8 +269,8 @@ function renderTransactions(){
       <div class="note">${escapeHtml(t.note||'')}</div>
       <div class="note small">Комісія: ${Number(t.commission||0).toFixed(2)} UAH</div>
       <div class="actions">
-        <button class="del icon-btn btn-danger" data-id="${t.id}" title="Видалити"><i class="fa fa-trash"></i></button>
-        <button class="edit icon-btn btn-primary" data-id="${t.id}" title="Редагувати"><i class="fa fa-edit"></i></button>
+        <button class="del btn-danger" data-id="${t.id}" title="Видалити"><i class="fa fa-trash"></i></button>
+        <button class="edit btn-primary" data-id="${t.id}" title="Редагувати"><i class="fa fa-edit"></i></button>
       </div>
     `;
     txCards.appendChild(card);
@@ -309,82 +279,120 @@ function renderTransactions(){
 
 // --- Статистика ---
 function renderStats(){
-  const stats={};
+  statsTableBody.innerHTML='';
+  const monthly={};
   for(const t of transactions){
     const m=t.date.slice(0,7);
-    if(!stats[m]) stats[m]={earned:0,credit:0,debit:0,commission:0};
-    stats[m][t.type]+=Number(t.amount);
-    stats[m].commission+=Number(t.commission||0);
+    if(!monthly[m]) monthly[m]={earned:0,credit:0,debit:0,commission:0};
+    monthly[m][t.type]+=(Number(t.amount)||0);
+    monthly[m].commission+=Number(t.commission||0);
   }
-  statsTableBody.innerHTML='';
-  const labels=Object.keys(stats).sort();
-  const earnedData=[],creditData=[],debitData=[];
-  for(const m of labels){
-    const e=stats[m].earned,c=stats[m].credit,d=stats[m].debit,b=e-c-d,com=stats[m].commission;
-    earnedData.push(e);creditData.push(c);debitData.push(d);
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${m}</td><td>${e.toFixed(2)}</td><td>${c.toFixed(2)}</td><td>${d.toFixed(2)}</td><td>${b.toFixed(2)}</td><td>${com.toFixed(2)}</td>`;
-    statsTableBody.appendChild(tr);
+  const months=Object.keys(monthly).sort();
+  const chartLabels=[],chartData=[];
+  for(const m of months){
+    const d=monthly[m];
+    const bal=d.earned-d.credit-d.debit;
+    chartLabels.push(m);
+    chartData.push(bal);
+    statsTableBody.innerHTML+=`<tr>
+      <td>${m}</td>
+      <td>${d.earned.toFixed(2)}</td>
+      <td>${d.credit.toFixed(2)}</td>
+      <td>${d.debit.toFixed(2)}</td>
+      <td>${bal.toFixed(2)}</td>
+      <td>${d.commission.toFixed(2)}</td>
+    </tr>`;
   }
-  if(statsChart){statsChart.destroy();}
-  statsChart=new Chart(statsChartEl,{type:'bar',data:{labels:labels,datasets:[{label:'Зароблено',data:earnedData,backgroundColor:'#0369a1'},{label:'Нарахування',data:creditData,backgroundColor:'#0ea5e9'},{label:'Списання',data:debitData,backgroundColor:'#7c2d12'}]},options:{responsive:true,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true}}}});
+  if(statsChart) statsChart.destroy();
+  statsChart=new Chart(statsChartEl,{type:'bar',data:{labels:chartLabels,datasets:[{label:'Баланс',data:chartData,backgroundColor:'#0ea5e9'}]},options:{responsive:true,plugins:{legend:{display:false}}}});
 }
 
-// --- Додавання ---
-addBtn.addEventListener('click',(e)=>{
+// --- Додати транзакцію ---
+addBtn.addEventListener('click',e=>{
   e.preventDefault();
-  const date=dateEl.value,type=typeEl.value,amount=parseFloat(amountEl.value),note=noteEl.value.trim(),commission=parseFloat(commissionEl.value)||0;
-  if(!date||isNaN(amount)||amount<=0)return;
-  const tx={id:'tx_'+Date.now(),date,type,amount:amount.toFixed(2),note,commission:commission.toFixed(2)};
-  transactions.push(tx); save(); render();
-  amountEl.value=''; noteEl.value=''; commissionEl.value='0';
+  const t={id:Date.now(),date:dateEl.value,type:typeEl.value,amount:Number(amountEl.value),note:noteEl.value,commission:Number(commissionEl.value||0)};
+  transactions.push(t);
+  save();
+  render();
+  document.getElementById('txForm').reset();
+  dateEl.value=new Date().toISOString().slice(0,10);
 });
 
-// --- Видалення і редагування ---
+// --- Очистити форму ---
+clearBtn.addEventListener('click',e=>{e.preventDefault();document.getElementById('txForm').reset();dateEl.value=new Date().toISOString().slice(0,10);});
+
+// --- Видалення та редагування ---
 txCards.addEventListener('click',e=>{
-  const id=e.target.closest('button')?.dataset?.id;
-  if(!id) return;
-  const tx=transactions.find(t=>t.id===id);
-  if(e.target.closest('.del')){if(confirm('Видалити запис?')){transactions=transactions.filter(t=>t.id!==id);save();render();}}
-  else if(e.target.closest('.edit')){dateEl.value=tx.date;typeEl.value=tx.type;amountEl.value=tx.amount;noteEl.value=tx.note;commissionEl.value=tx.commission;}
+  const delBtn=e.target.closest('.del');
+  const editBtn=e.target.closest('.edit');
+  if(delBtn){
+    const id=Number(delBtn.dataset.id);
+    transactions=transactions.filter(t=>t.id!==id);
+    save();render();
+  } else if(editBtn){
+    const id=Number(editBtn.dataset.id);
+    const t=transactions.find(x=>x.id===id);
+    if(t){dateEl.value=t.date;typeEl.value=t.type;amountEl.value=t.amount;noteEl.value=t.note;commissionEl.value=t.commission;
+      transactions=transactions.filter(x=>x.id!==id);render();}
+  }
 });
 
-// --- Очистити ---
-clearBtn.addEventListener('click',()=>{if(confirm('Очистити всі дані?')){transactions=[];save();render();}});
+// --- Авто-списання ---
+function runAutoDebit(){
+  const day=Number(autoDayEl.value);
+  const amount=Number(autoAmountEl.value);
+  if(!day||!amount)return;
+  const today=new Date();
+  if(today.getDate()!==day)return;
+  const last=Number(localStorage.getItem(LAST_AUTO_KEY)||0);
+  const todayStr=today.toISOString().slice(0,10);
+  if(last===todayStr)return;
+  transactions.push({id:Date.now(),date:todayStr,type:'debit',amount:amount,note:autoNoteEl.value||'Авто-списання',commission:0});
+  localStorage.setItem(LAST_AUTO_KEY,todayStr);
+  save();
+}
+
+// --- Збереження авто-списання ---
+saveAutoBtn.addEventListener('click',()=>{
+  localStorage.setItem(AUTO_KEY,JSON.stringify({day:autoDayEl.value,amount:autoAmountEl.value,note:autoNoteEl.value}));
+  autoSavedMsg.style.opacity=1;
+  setTimeout(()=>autoSavedMsg.style.opacity=0,1000);
+  runAutoDebit();render();
+});
 
 // --- Вкладки ---
-tabTx.addEventListener('click',()=>{txContent.style.display='block';autoContent.style.display='none';statsContent.style.display='none';settingsContent.style.display='none';tabTx.classList.add('active');tabAuto.classList.remove('active');tabStats.classList.remove('active');tabSettings.classList.remove('active');});
-tabAuto.addEventListener('click',()=>{txContent.style.display='none';autoContent.style.display='block';statsContent.style.display='none';settingsContent.style.display='none';tabTx.classList.remove('active');tabAuto.classList.add('active');tabStats.classList.remove('active');tabSettings.classList.remove('active');});
-tabStats.addEventListener('click',()=>{txContent.style.display='none';autoContent.style.display='none';statsContent.style.display='block';settingsContent.style.display='none';tabTx.classList.remove('active');tabAuto.classList.remove('active');tabStats.classList.add('active');tabSettings.classList.remove('active');});
-tabSettings.addEventListener('click',()=>{txContent.style.display='none';autoContent.style.display='none';statsContent.style.display='none';settingsContent.style.display='block';tabTx.classList.remove('active');tabAuto.classList.remove('active');tabStats.classList.remove('active');tabSettings.classList.add('active');});
+[tabTx,tabAuto,tabStats,tabSettings].forEach(t=>{
+  t.addEventListener('click',()=>{
+    [tabTx,tabAuto,tabStats,tabSettings].forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    txContent.style.display=t===tabTx?'block':'none';
+    autoContent.style.display=t===tabAuto?'block':'none';
+    statsContent.style.display=t===tabStats?'block':'none';
+    settingsContent.style.display=t===tabSettings?'block':'none';
+  });
+});
 
 // --- Зміна пароля ---
-changePassBtn.addEventListener('click',()=>{const oldVal=oldPass.value.trim(),newVal=newPass.value.trim();if(!oldVal||!newVal)return alert('Заповніть обидва поля');const saved=localStorage.getItem(PASS_KEY);if(saved!==oldVal)return alert('Невірний старий пароль');localStorage.setItem(PASS_KEY,newVal);alert('Пароль змінено');oldPass.value='';newPass.value='';});
+changePassBtn.addEventListener('click',()=>{
+  const oldp=oldPass.value.trim();
+  const newp=newPass.value.trim();
+  const saved=localStorage.getItem(PASS_KEY);
+  if(oldp!==saved)return alert('Старий пароль невірний');
+  if(!newp)return alert('Введіть новий пароль');
+  localStorage.setItem(PASS_KEY,newp);
+  alert('Пароль змінено');oldPass.value='';newPass.value='';
+});
 
 // --- Вихід ---
 logoutBtn.addEventListener('click',()=>{mainApp.style.display='none';loginScreen.style.display='flex';passwordInput.value='';});
 
-// --- Обнулити всі дані ---
-resetAllBtn.addEventListener('click',()=>{if(confirm('Видалити всі дані користувача?')){localStorage.clear();transactions=[];render();alert('Дані обнулено');mainApp.style.display='none';loginScreen.style.display='flex';}});
+// --- Скидання всіх даних ---
+resetAllBtn.addEventListener('click',()=>{if(confirm('Ви дійсно хочете видалити всі дані?')){localStorage.removeItem(STORAGE_KEY);transactions=[];render();}});
 
-// --- Згортання транзакцій ---
-txCollapseHeader.addEventListener('click',()=>{txCollapseBody.classList.toggle('show');});
+// --- Згортання форми ---
+txCollapseHeader.addEventListener('click',()=>{if(txFormContainer.style.display==='none'||txFormContainer.style.display===''){txFormContainer.style.display='grid';} else txFormContainer.style.display='none';});
 
-// --- Авто-списання ---
-function runAutoDebit(){
-  const autoData=JSON.parse(localStorage.getItem(AUTO_KEY)||'{}');
-  if(!autoData.day||!autoData.amount)return;
-  const today=new Date(); const todayDay=today.getDate();
-  const lastAuto=localStorage.getItem(LAST_AUTO_KEY);
-  const key=`${today.getFullYear()}-${today.getMonth()+1}-${autoData.day}`;
-  if(todayDay==autoData.day && lastAuto!==key){
-    transactions.push({id:'tx_'+Date.now(),date:today.toISOString().slice(0,10),type:'debit',amount:Number(autoData.amount).toFixed(2),note:autoData.note||'Авто-списання',commission:0});
-    localStorage.setItem(LAST_AUTO_KEY,key);
-    save();
-  }
-}
-saveAutoBtn.addEventListener('click',()=>{alert('Збережено');localStorage.setItem(AUTO_KEY,JSON.stringify({day:autoDayEl.value,amount:autoAmountEl.value,note:autoNoteEl.value}));autoSavedMsg.style.opacity='1';setTimeout(()=>autoSavedMsg.style.opacity='0',1500);});
-
+// --- Початкове завантаження ---
 load();
 }
 </script>

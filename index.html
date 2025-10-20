@@ -4,47 +4,51 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>Облік зарплати</title>
-<meta name="theme-color" content="#0f172a">
+<meta name="theme-color" content="#0c4a6e">
 <style>
-:root{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;color:#0f172a}
-*{box-sizing:border-box}
-html,body{height:100%;margin:0;padding:0;background:#f1f5f9}
-.app{max-width:720px;margin:0 auto;padding:12px;position:relative}
-header{position:sticky;top:0;background:linear-gradient(180deg,#0f172a,rgba(15,23,42,0.95));color:#fff;padding:14px;border-radius:10px;margin-bottom:10px;z-index:10}
-header h1{font-size:18px;margin:0 0 6px}
-.balance-row{display:flex;align-items:center;gap:8px}
-.balance{font-size:20px;font-weight:700}
-.muted{opacity:.9;font-size:13px}
-.tabs{display:flex;gap:8px;margin-bottom:10px}
-.tab{flex:1;text-align:center;padding:8px 0;border-radius:10px;background:#e2e8f0;color:#0f172a;font-weight:700;cursor:pointer}
-.tab.active{background:#0f172a;color:#fff}
-.card{background:#fff;border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(2,6,23,.06)}
-form{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-label{display:block;font-size:13px;color:#334155}
-input[type="date"], input[type="number"], select, input[type="text"], input[type="password"]{width:100%;padding:12px;border-radius:10px;border:1px solid #e2e8f0;font-size:15px}
-.full{grid-column:1 / -1}
-.actions{display:flex;gap:8px;align-items:center;justify-content:center}
+:root{
+  font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;
+  color:#0c4a6e;
+}
+*{box-sizing:border-box;}
+html,body{height:100%;margin:0;padding:0;background:#e0f2fe;}
+.app{max-width:720px;margin:0 auto;padding:12px;position:relative;}
+header{position:sticky;top:0;background:linear-gradient(180deg,#0c4a6e,rgba(12,74,110,0.95));color:#fff;padding:14px;border-radius:10px;margin-bottom:10px;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,0.1);}
+header h1{font-size:18px;margin:0 0 6px;}
+.balance-row{display:flex;align-items:center;gap:8px;}
+.balance{font-size:20px;font-weight:700;}
+.muted{opacity:.9;font-size:13px;}
+.tabs{display:flex;gap:8px;margin-bottom:10px;}
+.tab{flex:1;text-align:center;padding:8px 0;border-radius:10px;background:#bae6fd;color:#0c4a6e;font-weight:700;cursor:pointer;transition:0.2s;}
+.tab.active{background:#0c4a6e;color:#fff;}
+.card{background:#fff;border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(2,6,23,.06);transition:0.2s;}
+.card:hover{box-shadow:0 8px 24px rgba(2,6,23,.12);}
+form{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+label{display:block;font-size:13px;color:#334155;}
+input[type="date"], input[type="number"], select, input[type="text"], input[type="password"]{width:100%;padding:12px;border-radius:10px;border:1px solid #0c4a6e;font-size:15px;transition:0.2s;}
+input:focus{outline:none;border-color:#0284c7;box-shadow:0 0 6px rgba(2,132,199,0.3);}
+.full{grid-column:1 / -1;}
+.actions{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;}
 button {padding:8px 16px;font-size:15px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.15);transition:transform 0.1s, box-shadow 0.1s;cursor:pointer;}
 button:hover {transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,0.2);}
-.btn-primary { background: #0f172a; color: #fff; }
-.btn-ghost { background: #fff; border: 1px solid #0f172a; color: #0f172a; }
-.small{font-size:13px;color:#64748b}
-#loginScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center;padding:20px}
-#loginScreen input{margin-bottom:10px;width:80%;max-width:300px}
-footer{position:fixed;bottom:8px;width:100%;text-align:center;font-size:13px;color:rgba(15,23,42,0.5);font-weight:600;pointer-events:none;transition:0.3s;opacity:0.7}
-footer:hover{opacity:1}
-/* Картки транзакцій для мобільних */
+.btn-primary { background: #0c4a6e; color: #fff; border:none; }
+.btn-ghost { background: #fff; border: 1px solid #0c4a6e; color: #0c4a6e; }
+.btn-danger { background: #dc2626; color: #fff; border:none; }
+.small{font-size:13px;color:#64748b;}
+#loginScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center;padding:20px;}
+#loginScreen input{margin-bottom:10px;width:80%;max-width:300px;}
+footer{position:fixed;bottom:8px;width:100%;text-align:center;font-size:13px;color:rgba(15,23,42,0.5);font-weight:600;pointer-events:none;transition:0.3s;opacity:0.7;}
+footer:hover{opacity:1;}
 .tx-cards{display:flex;flex-direction:column;gap:8px;max-height:50vh;overflow-y:auto;}
-.tx-card{padding:12px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);background:#fff;display:flex;flex-direction:column;}
+.tx-card{padding:12px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);background:#fff;display:flex;flex-direction:column;transition:0.2s;}
+.tx-card:hover{box-shadow:0 4px 12px rgba(0,0,0,0.15);}
 .tx-card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
 .tx-card .top .date{font-size:13px;color:#64748b;}
 .tx-card .top .amount{font-weight:700;font-size:16px;}
 .tx-card .type-badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:600;color:#fff;margin-bottom:4px;}
-.type-earned{background:#075985;}
-.type-credit{background:#065f46;}
-.type-debit{background:#92400e;}
-.tx-card .note{font-size:14px;color:#334155;}
-.tx-card button.del{align-self:flex-end;margin-top:6px;padding:4px 8px;font-size:13px;}
+.type-earned{background:#0284c7;}
+.type-credit{background:#0ea5e9;}
+.type-debit{background:#7c2d12;}
 @media (max-width:520px){form{grid-template-columns:1fr} header{border-radius:0} .app{padding:10px} .balance{font-size:18px}}
 </style>
 </head>
@@ -57,28 +61,23 @@ footer:hover{opacity:1}
 
 <div class="app" id="mainApp" style="display:none">
   <header>
-    <h1>Облік зарплати на LiMaSoTrans.</h1>
+    <h1>Облік зарплати</h1>
     <div class="balance-row">
-      <div class="balance">Залишок: <span id="balance">0.00</span> UAH</div>
+      <div class="balance">Баланс: <span id="balance">0.00</span> UAH</div>
     </div>
     <div class="small muted">Баланс = Зароблено − Нарахування − Списання • Працює офлайн</div>
   </header>
 
   <div class="tabs">
     <div class="tab active" id="tabTx">Транзакції</div>
+    <div class="tab" id="tabAuto">Авто-списання</div>
     <div class="tab" id="tabStats">Статистика</div>
     <div class="tab" id="tabSettings">Налаштування</div>
   </div>
 
+  <!-- Вкладка Транзакції -->
   <div id="txContent">
     <div class="card">
-      <label>Авто-списання (щомісяця, виберіть день): 
-        <input type="number" id="autoDebitDay" min="1" max="31" placeholder="1-31" style="width:48%;display:inline-block">
-      </label>
-      <label>Сума <input type="number" id="autoDebitAmount" step="0.01" min="0" placeholder="UAH" style="width:48%;display:inline-block"></label>
-      <label>Опис <input type="text" id="autoDebitNote" placeholder="Наприклад: комунальні"></label>
-      <div class="small muted" style="margin-bottom:10px">Авто-списання відбувається один раз на місяць у вибраний день.</div>
-
       <form id="txForm">
         <label>Дата<input id="date" type="date" required></label>
         <label>Тип
@@ -95,11 +94,34 @@ footer:hover{opacity:1}
           <button id="clearBtn" type="button" class="btn-ghost">Очистити всі</button>
         </div>
       </form>
-
       <div class="tx-cards"></div>
     </div>
   </div>
 
+  <!-- Вкладка Авто-списання -->
+  <div id="autoContent" style="display:none">
+    <div class="card" style="background:linear-gradient(135deg,#cffafe,#bae6fd);">
+      <h2 style="color:#0c4a6e;margin-bottom:12px">Авто-списання</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;">
+        <div style="flex:1;min-width:120px;">
+          <label>День місяця</label>
+          <input type="number" id="autoDebitDay" min="1" max="31" placeholder="1-31" style="padding:10px;border-radius:8px;border:1px solid #0c4a6e;">
+        </div>
+        <div style="flex:1;min-width:120px;">
+          <label>Сума</label>
+          <input type="number" id="autoDebitAmount" step="0.01" min="0" placeholder="UAH" style="padding:10px;border-radius:8px;border:1px solid #0c4a6e;">
+        </div>
+        <div style="flex:2;min-width:180px;">
+          <label>Опис</label>
+          <input type="text" id="autoDebitNote" placeholder="Наприклад: комунальні" style="padding:10px;border-radius:8px;border:1px solid #0c4a6e;">
+        </div>
+      </div>
+      <button id="saveAutoBtn" class="btn-primary" style="margin-top:12px;transition:0.2s;">Зберегти авто-списання</button>
+      <div id="autoSavedMsg" class="small" style="color:#0c4a6e;margin-top:6px;opacity:0;transition:opacity 0.3s;">Збережено!</div>
+    </div>
+  </div>
+
+  <!-- Вкладка Статистика -->
   <div id="statsContent" style="display:none">
     <div class="card">
       <h2>Статистика по місяцях</h2>
@@ -113,6 +135,7 @@ footer:hover{opacity:1}
     </div>
   </div>
 
+  <!-- Вкладка Налаштування -->
   <div id="settingsContent" style="display:none">
     <div class="card">
       <h2>Налаштування</h2>
@@ -121,6 +144,7 @@ footer:hover{opacity:1}
       <div class="actions full">
         <button id="changePassBtn" class="btn-primary">Змінити пароль</button>
         <button id="logoutBtn" class="btn-ghost">Вийти</button>
+        <button id="resetAllBtn" class="btn-danger">Обнулити всі дані</button>
       </div>
     </div>
   </div>
@@ -130,18 +154,21 @@ footer:hover{opacity:1}
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-const STORAGE_KEY='payroll_manual_single_person_pwa_v8';
+// Сталі ключі
+const STORAGE_KEY='payroll_manual_single_person_pwa_v9';
 const PASS_KEY='payroll_pass';
 const AUTO_KEY='auto_debit';
 const LAST_AUTO_KEY='last_auto';
+
 const loginScreen=document.getElementById('loginScreen');
 const mainApp=document.getElementById('mainApp');
 const loginBtn=document.getElementById('loginBtn');
 const passwordInput=document.getElementById('passwordInput');
 
+// Вхід
 loginBtn.addEventListener('click',()=>{
   const inputPass=passwordInput.value.trim();
-  if(!inputPass)return alert('Введіть пароль');
+  if(!inputPass) return alert('Введіть пароль');
   const savedPass=localStorage.getItem(PASS_KEY);
   if(!savedPass){
     localStorage.setItem(PASS_KEY,inputPass);
@@ -161,20 +188,26 @@ function initApp(){
   const balanceEl=document.getElementById('balance');
   const clearBtn=document.getElementById('clearBtn');
   const tabTx=document.getElementById('tabTx');
+  const tabAuto=document.getElementById('tabAuto');
   const tabStats=document.getElementById('tabStats');
   const tabSettings=document.getElementById('tabSettings');
   const txContent=document.getElementById('txContent');
+  const autoContent=document.getElementById('autoContent');
   const statsContent=document.getElementById('statsContent');
   const settingsContent=document.getElementById('settingsContent');
   const statsTableBody=document.querySelector('#statsTable tbody');
   const statsChartEl=document.getElementById('statsChart');
   const changePassBtn=document.getElementById('changePassBtn');
   const logoutBtn=document.getElementById('logoutBtn');
+  const resetAllBtn=document.getElementById('resetAllBtn');
   const oldPass=document.getElementById('oldPass');
   const newPass=document.getElementById('newPass');
   const autoDayEl=document.getElementById('autoDebitDay');
   const autoAmountEl=document.getElementById('autoDebitAmount');
   const autoNoteEl=document.getElementById('autoDebitNote');
+  const saveAutoBtn=document.getElementById('saveAutoBtn');
+  const autoSavedMsg=document.getElementById('autoSavedMsg');
+
   let transactions=[]; let statsChart;
 
   function load(){
@@ -185,7 +218,7 @@ function initApp(){
     autoAmountEl.value=autoData.amount||'';
     autoNoteEl.value=autoData.note||'';
     runAutoDebit();
-    dateEl.value=new Date().toISOString().slice(0,10); 
+    dateEl.value=new Date().toISOString().slice(0,10);
     render();
   }
   function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(transactions));}
@@ -237,9 +270,10 @@ function initApp(){
       statsTableBody.appendChild(tr);
     }
     if(statsChart){statsChart.destroy();}
-    statsChart=new Chart(statsChartEl,{type:'bar',data:{labels:labels,datasets:[{label:'Зароблено',data:earnedData,backgroundColor:'#075985'},{label:'Нарахування',data:creditData,backgroundColor:'#065f46'},{label:'Списання',data:debitData,backgroundColor:'#92400e'}]},options:{responsive:true,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true}}}});
+    statsChart=new Chart(statsChartEl,{type:'bar',data:{labels:labels,datasets:[{label:'Зароблено',data:earnedData,backgroundColor:'#0284c7'},{label:'Нарахування',data:creditData,backgroundColor:'#0ea5e9'},{label:'Списання',data:debitData,backgroundColor:'#7c2d12'}]},options:{responsive:true,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true}}}});
   }
 
+  // Додавання транзакції
   document.getElementById('txForm').addEventListener('submit',(e)=>{
     e.preventDefault();
     const date=dateEl.value,type=typeEl.value,amount=parseFloat(amountEl.value),note=noteEl.value.trim();
@@ -249,6 +283,7 @@ function initApp(){
     amountEl.value=''; noteEl.value='';
   });
 
+  // Видалення транзакції
   txCards.addEventListener('click',(e)=>{
     if(e.target.classList.contains('del')){
       const id=e.target.dataset.id;
@@ -259,12 +294,16 @@ function initApp(){
     }
   });
 
+  // Очистити всі
   clearBtn.addEventListener('click',()=>{if(confirm('Очистити всі дані?')){transactions=[];save();render();}});
 
-  tabTx.addEventListener('click',()=>{txContent.style.display='block';statsContent.style.display='none';settingsContent.style.display='none';tabTx.classList.add('active');tabStats.classList.remove('active');tabSettings.classList.remove('active');});
-  tabStats.addEventListener('click',()=>{txContent.style.display='none';statsContent.style.display='block';settingsContent.style.display='none';tabTx.classList.remove('active');tabStats.classList.add('active');tabSettings.classList.remove('active');});
-  tabSettings.addEventListener('click',()=>{txContent.style.display='none';statsContent.style.display='none';settingsContent.style.display='block';tabTx.classList.remove('active');tabStats.classList.remove('active');tabSettings.classList.add('active');});
+  // Вкладки
+  tabTx.addEventListener('click',()=>{txContent.style.display='block';autoContent.style.display='none';statsContent.style.display='none';settingsContent.style.display='none';tabTx.classList.add('active');tabAuto.classList.remove('active');tabStats.classList.remove('active');tabSettings.classList.remove('active');});
+  tabAuto.addEventListener('click',()=>{txContent.style.display='none';autoContent.style.display='block';statsContent.style.display='none';settingsContent.style.display='none';tabTx.classList.remove('active');tabAuto.classList.add('active');tabStats.classList.remove('active');tabSettings.classList.remove('active');});
+  tabStats.addEventListener('click',()=>{txContent.style.display='none';autoContent.style.display='none';statsContent.style.display='block';settingsContent.style.display='none';tabTx.classList.remove('active');tabAuto.classList.remove('active');tabStats.classList.add('active');tabSettings.classList.remove('active');});
+  tabSettings.addEventListener('click',()=>{txContent.style.display='none';autoContent.style.display='none';statsContent.style.display='none';settingsContent.style.display='block';tabTx.classList.remove('active');tabAuto.classList.remove('active');tabStats.classList.remove('active');tabSettings.classList.add('active');});
 
+  // Пароль
   changePassBtn.addEventListener('click',()=>{
     const oldVal=oldPass.value.trim(),newVal=newPass.value.trim();
     if(!oldVal||!newVal)return alert('Заповніть обидва поля');
@@ -273,12 +312,31 @@ function initApp(){
     localStorage.setItem(PASS_KEY,newVal);
     alert('Пароль змінено'); oldPass.value=''; newPass.value='';
   });
-
   logoutBtn.addEventListener('click',()=>{mainApp.style.display='none';loginScreen.style.display='flex';passwordInput.value='';});
+
+  // Обнулити всі дані
+  resetAllBtn.addEventListener('click',()=>{
+    if(confirm('Ви впевнені, що хочете обнулити всі дані?')) {
+      localStorage.removeItem(PASS_KEY);
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(AUTO_KEY);
+      localStorage.removeItem(LAST_AUTO_KEY);
+      location.reload();
+    }
+  });
+
+  // Авто-списання
+  saveAutoBtn.addEventListener('click',()=>{
+    const day=autoDayEl.value,amount=autoAmountEl.value,note=autoNoteEl.value;
+    if(!day || !amount) return alert('Вкажіть день та суму');
+    localStorage.setItem(AUTO_KEY,JSON.stringify({day,amount,note}));
+    autoSavedMsg.style.opacity=1;
+    setTimeout(()=>{autoSavedMsg.style.opacity=0;},2000);
+  });
 
   function runAutoDebit(){
     const autoData=JSON.parse(localStorage.getItem(AUTO_KEY)||'{}');
-    if(!autoData.day||!autoData.amount)return;
+    if(!autoData.day||!autoData.amount) return;
     const today=new Date();
     const todayDay=today.getDate();
     const lastAuto=localStorage.getItem(LAST_AUTO_KEY);

@@ -49,19 +49,29 @@ footer:hover{opacity:1;}
 .tx-card button{margin-top:6px;}
 .tx-collapse-body{display:none;transition:all 0.3s;}
 .tx-collapse-body.show{display:grid;}
+#statsContent .card {
+  max-height: 60vh; /* обмеження висоти на 60% від висоти екрана */
+  overflow-y: auto;  /* вертикальна прокрутка */
+  padding: 1px;
+}
 #statsTable {
-  font-size: 6px; /* зменшуємо загальний шрифт таблиці */
+  font-size: 6px;
+  width: 100%;
 }
 
 #statsTable th, #statsTable td {
-  padding: 1px 1px; /* трохи менше відступи */
-  font-size: 2px;  /* шрифт для заголовків і клітинок */
+  padding: 4px 6px;
+  font-size: 12px;
 }
+
 @media (max-width:520px){
   #statsTable, #statsTable th, #statsTable td {
-    font-size: 6px;
+    font-size: 10px;
     padding: 2px 4px;
   }
+}
+#statsChart {
+  max-height: 200px !important;
 }
 </style>
 </head>
@@ -380,5 +390,3 @@ load();
 </script>
 </body>
 </html>
-
-

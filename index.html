@@ -12,23 +12,23 @@
 }
 *{box-sizing:border-box;}
 html,body{height:100%;margin:0;padding:0;background:#e0f2fe;}
-.app{max-width:720px;margin:0 auto;padding:12px;position:relative;}
-header{position:sticky;top:0;background:linear-gradient(180deg,#0c4a6e,rgba(12,74,110,0.95));color:#fff;padding:14px;border-radius:10px;margin-bottom:10px;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,0.1);}
+.app{width:100%;padding:12px;position:relative;}
+header{position:sticky;top:0;background:linear-gradient(180deg,#0c4a6e,rgba(12,74,110,0.95));color:#fff;padding:14px;border-radius:10px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);}
 header h1{font-size:18px;margin:0 0 6px;}
-.balance-row{display:flex;align-items:center;gap:8px;}
+.balance-row{display:flex;align-items:center;gap:8px;transition:0.5s;}
 .balance{font-size:20px;font-weight:700;}
 .muted{opacity:.9;font-size:13px;}
-.tabs{display:flex;gap:8px;margin-bottom:10px;}
-.tab{flex:1;text-align:center;padding:8px 0;border-radius:10px;background:#bae6fd;color:#0c4a6e;font-weight:700;cursor:pointer;transition:0.2s;}
+.tabs{display:flex;gap:8px;margin-bottom:10px;overflow-x:auto;}
+.tab{flex:1;text-align:center;padding:8px 0;border-radius:10px;background:#bae6fd;color:#0c4a6e;font-weight:700;cursor:pointer;transition:0.2s;white-space:nowrap;}
 .tab.active{background:#0c4a6e;color:#fff;}
-.card{background:#fff;border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(2,6,23,.06);transition:0.2s;}
+.card{background:#fff;border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(2,6,23,.06);transition:0.3s;margin-bottom:10px;}
 .card:hover{box-shadow:0 8px 24px rgba(2,6,23,.12);}
-form{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-label{display:block;font-size:13px;color:#334155;}
+form{display:flex;flex-wrap:wrap;gap:8px;}
+label{display:block;font-size:13px;color:#334155;width:100%;}
 input[type="date"], input[type="number"], select, input[type="text"], input[type="password"]{width:100%;padding:12px;border-radius:10px;border:1px solid #0c4a6e;font-size:15px;transition:0.2s;}
 input:focus{outline:none;border-color:#0284c7;box-shadow:0 0 6px rgba(2,132,199,0.3);}
-.full{grid-column:1 / -1;}
-.actions{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;}
+.full{width:100%;}
+.actions{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;width:100%;}
 button {padding:8px 16px;font-size:15px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.15);transition:transform 0.1s, box-shadow 0.1s;cursor:pointer;}
 button:hover {transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,0.2);}
 .btn-primary { background: #0c4a6e; color: #fff; border:none; }
@@ -39,9 +39,9 @@ button:hover {transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,0.2);}
 #loginScreen input{margin-bottom:10px;width:80%;max-width:300px;}
 footer{position:fixed;bottom:8px;width:100%;text-align:center;font-size:13px;color:rgba(15,23,42,0.5);font-weight:600;pointer-events:none;transition:0.3s;opacity:0.7;}
 footer:hover{opacity:1;}
-.tx-cards{display:flex;flex-direction:column;gap:8px;max-height:50vh;overflow-y:auto;}
-.tx-card{padding:12px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);background:#fff;display:flex;flex-direction:column;transition:0.2s;}
-.tx-card:hover{box-shadow:0 4px 12px rgba(0,0,0,0.15);}
+.tx-cards{display:flex;flex-direction:column;gap:8px;max-height:50vh;overflow-y:auto;width:100%;}
+.tx-card{padding:12px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);background:#fff;display:flex;flex-direction:column;transition:0.3s;opacity:0;transform:translateY(20px);}
+.tx-card.show{opacity:1;transform:translateY(0);}
 .tx-card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
 .tx-card .top .date{font-size:13px;color:#64748b;}
 .tx-card .top .amount{font-weight:700;font-size:16px;}
@@ -49,7 +49,12 @@ footer:hover{opacity:1;}
 .type-earned{background:#0284c7;}
 .type-credit{background:#0ea5e9;}
 .type-debit{background:#7c2d12;}
-@media (max-width:520px){form{grid-template-columns:1fr} header{border-radius:0} .app{padding:10px} .balance{font-size:18px}}
+@media (max-width:520px){
+  header {border-radius:0;}
+  .balance {font-size:18px;}
+  input, select, button {width:100%;}
+  .actions {flex-direction:column;}
+}
 </style>
 </head>
 <body>
@@ -61,9 +66,9 @@ footer:hover{opacity:1;}
 
 <div class="app" id="mainApp" style="display:none">
   <header>
-    <h1>Облік зарплати</h1>
+    <h1>Облік зарплати на LiMaSo_trans</h1>
     <div class="balance-row">
-      <div class="balance">Баланс: <span id="balance">0.00</span> UAH</div>
+      <div class="balance">Залишок: <span id="balance">0.00</span> UAH</div>
     </div>
     <div class="small muted">Баланс = Зароблено − Нарахування − Списання • Працює офлайн</div>
   </header>
@@ -75,7 +80,6 @@ footer:hover{opacity:1;}
     <div class="tab" id="tabSettings">Налаштування</div>
   </div>
 
-  <!-- Вкладка Транзакції -->
   <div id="txContent">
     <div class="card">
       <form id="txForm">
@@ -98,30 +102,28 @@ footer:hover{opacity:1;}
     </div>
   </div>
 
-  <!-- Вкладка Авто-списання -->
   <div id="autoContent" style="display:none">
     <div class="card" style="background:linear-gradient(135deg,#cffafe,#bae6fd);">
       <h2 style="color:#0c4a6e;margin-bottom:12px">Авто-списання</h2>
       <div style="display:flex;flex-wrap:wrap;gap:12px;">
         <div style="flex:1;min-width:120px;">
           <label>День місяця</label>
-          <input type="number" id="autoDebitDay" min="1" max="31" placeholder="1-31" style="padding:10px;border-radius:8px;border:1px solid #0c4a6e;">
+          <input type="number" id="autoDebitDay" min="1" max="31" placeholder="1-31">
         </div>
         <div style="flex:1;min-width:120px;">
           <label>Сума</label>
-          <input type="number" id="autoDebitAmount" step="0.01" min="0" placeholder="UAH" style="padding:10px;border-radius:8px;border:1px solid #0c4a6e;">
+          <input type="number" id="autoDebitAmount" step="0.01" min="0" placeholder="UAH">
         </div>
         <div style="flex:2;min-width:180px;">
           <label>Опис</label>
-          <input type="text" id="autoDebitNote" placeholder="Наприклад: комунальні" style="padding:10px;border-radius:8px;border:1px solid #0c4a6e;">
+          <input type="text" id="autoDebitNote" placeholder="Наприклад: комунальні">
         </div>
       </div>
-      <button id="saveAutoBtn" class="btn-primary" style="margin-top:12px;transition:0.2s;">Зберегти авто-списання</button>
+      <button id="saveAutoBtn" class="btn-primary" style="margin-top:12px;">Зберегти авто-списання</button>
       <div id="autoSavedMsg" class="small" style="color:#0c4a6e;margin-top:6px;opacity:0;transition:opacity 0.3s;">Збережено!</div>
     </div>
   </div>
 
-  <!-- Вкладка Статистика -->
   <div id="statsContent" style="display:none">
     <div class="card">
       <h2>Статистика по місяцях</h2>
@@ -135,7 +137,6 @@ footer:hover{opacity:1;}
     </div>
   </div>
 
-  <!-- Вкладка Налаштування -->
   <div id="settingsContent" style="display:none">
     <div class="card">
       <h2>Налаштування</h2>
@@ -154,21 +155,19 @@ footer:hover{opacity:1;}
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-// Сталі ключі
-const STORAGE_KEY='payroll_manual_single_person_pwa_v9';
+// === JS код із всіх функцій ===
+const STORAGE_KEY='payroll_manual_single_person_pwa_v8';
 const PASS_KEY='payroll_pass';
 const AUTO_KEY='auto_debit';
 const LAST_AUTO_KEY='last_auto';
-
 const loginScreen=document.getElementById('loginScreen');
 const mainApp=document.getElementById('mainApp');
 const loginBtn=document.getElementById('loginBtn');
 const passwordInput=document.getElementById('passwordInput');
 
-// Вхід
 loginBtn.addEventListener('click',()=>{
   const inputPass=passwordInput.value.trim();
-  if(!inputPass) return alert('Введіть пароль');
+  if(!inputPass)return alert('Введіть пароль');
   const savedPass=localStorage.getItem(PASS_KEY);
   if(!savedPass){
     localStorage.setItem(PASS_KEY,inputPass);
@@ -199,7 +198,6 @@ function initApp(){
   const statsChartEl=document.getElementById('statsChart');
   const changePassBtn=document.getElementById('changePassBtn');
   const logoutBtn=document.getElementById('logoutBtn');
-  const resetAllBtn=document.getElementById('resetAllBtn');
   const oldPass=document.getElementById('oldPass');
   const newPass=document.getElementById('newPass');
   const autoDayEl=document.getElementById('autoDebitDay');
@@ -207,7 +205,7 @@ function initApp(){
   const autoNoteEl=document.getElementById('autoDebitNote');
   const saveAutoBtn=document.getElementById('saveAutoBtn');
   const autoSavedMsg=document.getElementById('autoSavedMsg');
-
+  const resetAllBtn=document.getElementById('resetAllBtn');
   let transactions=[]; let statsChart;
 
   function load(){
@@ -218,9 +216,10 @@ function initApp(){
     autoAmountEl.value=autoData.amount||'';
     autoNoteEl.value=autoData.note||'';
     runAutoDebit();
-    dateEl.value=new Date().toISOString().slice(0,10);
+    dateEl.value=new Date().toISOString().slice(0,10); 
     render();
   }
+
   function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(transactions));}
   function computeBalance(){let e=0,c=0,d=0;for(const t of transactions){const a=Number(t.amount);if(t.type==='earned')e+=a;else if(t.type==='credit')c+=a;else d+=a;}return e-c-d;}
   function escapeHtml(s){return s.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));}
@@ -237,7 +236,7 @@ function initApp(){
     const sorted=[...transactions].sort((a,b)=>b.date.localeCompare(a.date));
     for(const t of sorted){
       const card=document.createElement('div');
-      card.className='tx-card';
+      card.className='tx-card show';
       const dt=new Date(t.date).toLocaleDateString();
       const label=t.type==='earned'?'Зароблено':t.type==='credit'?'Нарахування':'Списання';
       const cls=t.type==='earned'?'type-earned':t.type==='credit'?'type-credit':'type-debit';
@@ -273,7 +272,6 @@ function initApp(){
     statsChart=new Chart(statsChartEl,{type:'bar',data:{labels:labels,datasets:[{label:'Зароблено',data:earnedData,backgroundColor:'#0284c7'},{label:'Нарахування',data:creditData,backgroundColor:'#0ea5e9'},{label:'Списання',data:debitData,backgroundColor:'#7c2d12'}]},options:{responsive:true,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true}}}});
   }
 
-  // Додавання транзакції
   document.getElementById('txForm').addEventListener('submit',(e)=>{
     e.preventDefault();
     const date=dateEl.value,type=typeEl.value,amount=parseFloat(amountEl.value),note=noteEl.value.trim();
@@ -283,7 +281,6 @@ function initApp(){
     amountEl.value=''; noteEl.value='';
   });
 
-  // Видалення транзакції
   txCards.addEventListener('click',(e)=>{
     if(e.target.classList.contains('del')){
       const id=e.target.dataset.id;
@@ -294,49 +291,20 @@ function initApp(){
     }
   });
 
-  // Очистити всі
   clearBtn.addEventListener('click',()=>{if(confirm('Очистити всі дані?')){transactions=[];save();render();}});
 
-  // Вкладки
   tabTx.addEventListener('click',()=>{txContent.style.display='block';autoContent.style.display='none';statsContent.style.display='none';settingsContent.style.display='none';tabTx.classList.add('active');tabAuto.classList.remove('active');tabStats.classList.remove('active');tabSettings.classList.remove('active');});
   tabAuto.addEventListener('click',()=>{txContent.style.display='none';autoContent.style.display='block';statsContent.style.display='none';settingsContent.style.display='none';tabTx.classList.remove('active');tabAuto.classList.add('active');tabStats.classList.remove('active');tabSettings.classList.remove('active');});
   tabStats.addEventListener('click',()=>{txContent.style.display='none';autoContent.style.display='none';statsContent.style.display='block';settingsContent.style.display='none';tabTx.classList.remove('active');tabAuto.classList.remove('active');tabStats.classList.add('active');tabSettings.classList.remove('active');});
   tabSettings.addEventListener('click',()=>{txContent.style.display='none';autoContent.style.display='none';statsContent.style.display='none';settingsContent.style.display='block';tabTx.classList.remove('active');tabAuto.classList.remove('active');tabStats.classList.remove('active');tabSettings.classList.add('active');});
 
-  // Пароль
-  changePassBtn.addEventListener('click',()=>{
-    const oldVal=oldPass.value.trim(),newVal=newPass.value.trim();
-    if(!oldVal||!newVal)return alert('Заповніть обидва поля');
-    const saved=localStorage.getItem(PASS_KEY);
-    if(saved!==oldVal)return alert('Невірний старий пароль');
-    localStorage.setItem(PASS_KEY,newVal);
-    alert('Пароль змінено'); oldPass.value=''; newPass.value='';
-  });
+  changePassBtn.addEventListener('click',()=>{const oldVal=oldPass.value.trim(),newVal=newPass.value.trim();if(!oldVal||!newVal)return alert('Заповніть обидва поля');const saved=localStorage.getItem(PASS_KEY);if(saved!==oldVal)return alert('Невірний старий пароль');localStorage.setItem(PASS_KEY,newVal);alert('Пароль змінено'); oldPass.value=''; newPass.value='';});
   logoutBtn.addEventListener('click',()=>{mainApp.style.display='none';loginScreen.style.display='flex';passwordInput.value='';});
-
-  // Обнулити всі дані
-  resetAllBtn.addEventListener('click',()=>{
-    if(confirm('Ви впевнені, що хочете обнулити всі дані?')) {
-      localStorage.removeItem(PASS_KEY);
-      localStorage.removeItem(STORAGE_KEY);
-      localStorage.removeItem(AUTO_KEY);
-      localStorage.removeItem(LAST_AUTO_KEY);
-      location.reload();
-    }
-  });
-
-  // Авто-списання
-  saveAutoBtn.addEventListener('click',()=>{
-    const day=autoDayEl.value,amount=autoAmountEl.value,note=autoNoteEl.value;
-    if(!day || !amount) return alert('Вкажіть день та суму');
-    localStorage.setItem(AUTO_KEY,JSON.stringify({day,amount,note}));
-    autoSavedMsg.style.opacity=1;
-    setTimeout(()=>{autoSavedMsg.style.opacity=0;},2000);
-  });
+  resetAllBtn.addEventListener('click',()=>{if(confirm('Обнулити всі дані користувача?')){localStorage.clear();location.reload();}});
 
   function runAutoDebit(){
     const autoData=JSON.parse(localStorage.getItem(AUTO_KEY)||'{}');
-    if(!autoData.day||!autoData.amount) return;
+    if(!autoData.day||!autoData.amount)return;
     const today=new Date();
     const todayDay=today.getDate();
     const lastAuto=localStorage.getItem(LAST_AUTO_KEY);
@@ -347,6 +315,12 @@ function initApp(){
       save();
     }
   }
+
+  saveAutoBtn.addEventListener('click',()=>{
+    localStorage.setItem(AUTO_KEY,JSON.stringify({day:autoDayEl.value,amount:autoAmountEl.value,note:autoNoteEl.value}));
+    autoSavedMsg.style.opacity=1;
+    setTimeout(()=>autoSavedMsg.style.opacity=0,1500);
+  });
 
   load();
 }

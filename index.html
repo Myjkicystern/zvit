@@ -68,6 +68,7 @@ footer:hover{opacity:1;}
     <h1>Облік зарплати на LiMaSo_Trans</h1>
     <div class="balance-row">
       <div class="balance">Залишок: <span id="balance">0.00</span> UAH</div>
+      <button id="goTripsBtn" class="btn-ghost" style="margin-left:auto;"><i class="fa fa-truck"></i> Рейси</button>
     </div>
     <div class="small muted"></div>
   </header>
@@ -153,6 +154,12 @@ footer:hover{opacity:1;}
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+
+  document.getElementById('goTripsBtn').addEventListener('click', () => {
+  window.location.href = 'Trafic.html'; // заміни на URL сторінки рейсів
+});
+ 
+
 const STORAGE_KEY='payroll_manual_single_person_pwa_v9';
 const PASS_KEY='payroll_pass';
 const AUTO_KEY='auto_debit';
@@ -374,4 +381,3 @@ load();
 </script>
 </body>
 </html>
-

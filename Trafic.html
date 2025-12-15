@@ -76,7 +76,7 @@ function render(){
    <div class="row"><strong>🗺️ ${t.route}</strong></div>
    <div class="row"><span>${t.dl||''} — ${t.du||''}</span></div>
    <div class="row"><span>Км</span><span>${t.km}</span></div>
-   <div class="row"><span>Фрахт за тону</span><span>${t.freight || 0} €</span></div>
+   <div class="row"><span>Фракт за тону</span><span>${t.freight || 0} €</span></div>
    <div class="row"><span>Ціна</span><span>${t.price.toFixed(2)} ${t.currency} / ${(t.price*t.rate).toFixed(0)} ₴ (курс ${t.rate})</span></div>
    <div class="row"><span>Витрати</span><span>${t.costs.toFixed(2)} €</span></div>
    ${t.costDesc ? `<div class="row"><span>📝 ${t.costDesc}</span></div>` : ''}
@@ -149,3 +149,4 @@ render();
 </script>
 </body>
 </html>
+

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Облік рейсів — Водій</title>
+<meta name="theme-color" content="#0ea5e9" />
+<style>
+body{margin:0;font-family:system-ui,Roboto,sans-serif;background:#f1f5f9}
+header{background:#0ea5e9;color:#fff;padding:16px;text-align:center;font-weight:600}
+.container{padding:12px;max-width:480px;margin:auto}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 6px 14px rgba(0,0,0,.08)}
+label{font-size:13px;color:#475569}
+input,select{width:100%;margin:4px 0 10px;padding:10px;border-radius:12px;border:1px solid #cbd5e1;font-size:15px}
+button{width:100%;padding:14px;border:none;border-radius:16px;background:#0ea5e9;color:#fff;font-size:16px;font-weight:600}
+.trip{border-bottom:1px solid #e2e8f0;padding:10px 0;font-size:14px}
+.trip:last-child{border-bottom:none}
+.row{display:flex;justify-content:space-between;gap:8px}
+.profit{font-weight:700}
+.del{background:#ef4444;margin-top:6px}
+.edit{background:#f59e0b;margin-top:6px}
+</style>
+</head>
+<body>
+<header>🚛 Облік рейсів</header>
+<div class="container">
+
+<div class="card">
+<label>Дата завантаження</label>
+<input type="date" id="dateLoad">
+<label>Дата розвантаження</label>
+<input type="date" id="dateUnload">
+<label>Завантаження</label>
+<input type="text" id="placeLoad" placeholder="Місто / склад">
+<label>Розвантаження</label>
+<input type="text" id="placeUnload" placeholder="Місто / склад">
+<label>Ціна за рейс</label>
+<input type="number" id="price">
+<label>Валюта</label>
+<select id="currency">
+<option value="EUR">€ Євро</option>
+<option value="USD">$ Долар</option>
+<option value="UAH">₴ Гривня</option>
+</select>
+<label>Курс € → ₴</label>
+<input type="number" id="rate" value="42">
+<label>Кілометраж (км)</label>
+<input type="number" id="km">
+<label>Фрахт за тонну (€)</label>
+<input type="number" id="freight">
+<label>Витрати (€)</label>
+<input type="number" id="costs">
+<label>Опис витрат</label>
+<input type="text" id="costDesc" placeholder="Паливо, дороги, стоянка">
+<button onclick="saveTrip()">💾 Зберегти рейс</button>
+</div>
+
+<div class="card" id="list"></div>
+</div>
+
+<script>
+let trips = JSON.parse(localStorage.getItem('trips')) || [];
+let editIndex = null;
+
+const list = document.getElementById('list');
+const currencyEl = document.getElementById('currency');
+
+function render(){
+ list.innerHTML='';
+ if(trips.length===0){list.innerHTML='<small>Рейсів поки немає</small>';return;}
+ trips.forEach((t,i)=>{
+  const profit = t.price * 0.17; // 17% від ціни
+  const div = document.createElement('div');
+  div.className='trip';
+  div.innerHTML=`
+   <div class="row"><strong>🗺️ ${t.route}</strong></div>
+   <div class="row"><span>${t.dl||''} — ${t.du||''}</span></div>
+   <div class="row"><span>Км</span><span>${t.km}</span></div>
+   <div class="row"><span>Фрахт за тону</span><span>${t.freight || 0} €</span></div>
+   <div class="row"><span>Ціна</span><span>${t.price.toFixed(2)} ${t.currency} / ${(t.price*t.rate).toFixed(0)} ₴ (курс ${t.rate})</span></div>
+   <div class="row"><span>Витрати</span><span>${t.costs.toFixed(2)} €</span></div>
+   ${t.costDesc ? `<div class="row"><span>📝 ${t.costDesc}</span></div>` : ''}
+   <div class="row profit"><span>Прибуток (17%)</span><span>${profit.toFixed(2)} €</span></div>
+   <button class="edit" onclick="editTrip(${i})">✏️ Редагувати</button>
+   <button class="del" onclick="removeTrip(${i})">🗑️ Видалити</button>`;
+  list.appendChild(div);
+ });
+}
+
+function saveTrip(){
+ if(!placeLoad.value || !placeUnload.value){alert('Заповни маршрут');return;}
+ const currency = currencyEl.value;
+ const rateVal = Number(rate.value || 0);
+ let priceInput = Number(price.value || 0);
+ let priceEUR = priceInput;
+ if(currency==='USD') priceEUR = priceInput * 0.93;
+ if(currency==='UAH') priceEUR = rateVal ? priceInput / rateVal : 0;
+ const trip = {
+  dl: dateLoad.value,
+  du: dateUnload.value,
+  load: placeLoad.value,
+  unload: placeUnload.value,
+  route: placeLoad.value + ' → ' + placeUnload.value,
+  price: priceEUR,
+  currency: currency,
+  km: Number(km.value || 0),
+  freight: Number(freight.value || 0),
+  costs: Number(costs.value || 0),
+  costDesc: costDesc.value,
+  rate: rateVal
+ };
+ if(editIndex !== null){
+  trips[editIndex] = trip;
+  editIndex = null;
+ } else {
+  trips.unshift(trip);
+ }
+ localStorage.setItem('trips', JSON.stringify(trips));
+ document.querySelectorAll('input').forEach(i => i.value = '');
+ rate.value = rateVal;
+ render();
+}
+
+function editTrip(i){
+ const t = trips[i];
+ editIndex = i;
+ dateLoad.value = t.dl;
+ dateUnload.value = t.du;
+ placeLoad.value = t.load;
+ placeUnload.value = t.unload;
+ price.value = t.price;
+ freight.value = t.freight || 0;
+ currencyEl.value = t.currency;
+ km.value = t.km;
+ costs.value = t.costs;
+ costDesc.value = t.costDesc || '';
+ rate.value = t.rate;
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function removeTrip(i){
+ if(!confirm('Видалити рейс?')) return;
+ trips.splice(i,1);
+ localStorage.setItem('trips', JSON.stringify(trips));
+ render();
+}
+
+render();
+</script>
+</body>
+</html>

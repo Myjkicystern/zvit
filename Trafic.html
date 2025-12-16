@@ -19,13 +19,20 @@ button{width:100%;padding:14px;border:none;border-radius:16px;background:#0ea5e9
 .profit{font-weight:700}
 .del{background:#ef4444;margin-top:6px}
 .edit{background:#f59e0b;margin-top:6px}
+.hidden{display:none}
 </style>
 </head>
 <body>
 <header>🚛 Облік рейсів</header>
+<button onclick="goBack()" style="margin-bottom:8px;background:#64748b">
+⬅ Назад
+</button>
+
+<button onclick="toggleForm()" style="margin-bottom:12px">➕ Додати рейс</button>
+
 <div class="container">
 
-<div class="card">
+<div class="card hidden" id="formCard">
 <label>Дата завантаження</label>
 <input type="date" id="dateLoad">
 <label>Дата розвантаження</label>
@@ -76,7 +83,7 @@ function render(){
    <div class="row"><strong>🗺️ ${t.route}</strong></div>
    <div class="row"><span>${t.dl||''} — ${t.du||''}</span></div>
    <div class="row"><span>Км</span><span>${t.km}</span></div>
-   <div class="row"><span>Фракт за тону</span><span>${t.freight || 0} €</span></div>
+   <div class="row"><span>Фрахт за тону</span><span>${t.freight || 0} €</span></div>
    <div class="row"><span>Ціна</span><span>${t.price.toFixed(2)} ${t.currency} / ${(t.price*t.rate).toFixed(0)} ₴ (курс ${t.rate})</span></div>
    <div class="row"><span>Витрати</span><span>${t.costs.toFixed(2)} €</span></div>
    ${t.costDesc ? `<div class="row"><span>📝 ${t.costDesc}</span></div>` : ''}
@@ -118,6 +125,7 @@ function saveTrip(){
  localStorage.setItem('trips', JSON.stringify(trips));
  document.querySelectorAll('input').forEach(i => i.value = '');
  rate.value = rateVal;
+ document.getElementById('formCard').classList.add('hidden');
  render();
 }
 
@@ -145,8 +153,15 @@ function removeTrip(i){
  render();
 }
 
+function toggleForm(){
+ const form = document.getElementById('formCard');
+ form.classList.toggle('hidden');
+}
+
 render();
+function goBack(){
+ window.location.href = 'index.html';
+}
 </script>
 </body>
 </html>
-

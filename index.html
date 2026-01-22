@@ -54,6 +54,9 @@ footer:hover{opacity:1;}
 #statsTable th, #statsTable td { padding: 4px 6px; font-size: 8px; }
 @media (max-width:520px){ #statsTable, #statsTable th, #statsTable td { font-size: 6px; padding: 2px 4px; } }
 #statsChart { max-height: 150px !important; }
+.balance span:hover{
+  opacity:0.8;
+}
 </style>
 </head>
 <body>
@@ -67,7 +70,7 @@ footer:hover{opacity:1;}
   <header>
     <h1>Облік зарплати на LiMaSo_Trans</h1>
     <div class="balance-row">
-      <div class="balance">Залишок: <span id="balance">0.00</span> UAH</div>
+      <div class="balance">Залишок: <span id="balance" style="cursor:pointer;text-decoration:underline"></span> UAH</div>
       <button id="goTripsBtn" class="btn-ghost" style="margin-left:auto;"><i class="fa fa-truck"></i> Рейси</button>
     </div>
     <div class="small muted"></div>
@@ -266,6 +269,34 @@ function render(){
   renderTransactions();
   renderStats();
   const {balance}=computeBalance();
+  balanceEl.addEventListener('click', () => {
+  const { balance } = computeBalance();
+  const newBalance = prompt(
+    'Введіть бажаний залишок (UAH):',
+    balance.toFixed(2)
+  );
+
+  if (newBalance === null) return;
+
+  const val = parseFloat(newBalance);
+  if (isNaN(val)) return alert('Некоректна сума');
+
+  const diff = val - balance;
+
+  if (diff === 0) return;
+
+  transactions.push({
+    id: 'tx_' + Date.now(),
+    date: new Date().toISOString().slice(0,10),
+    type: diff > 0 ? 'earned' : 'debit',
+    amount: Math.abs(diff).toFixed(2),
+    note: 'Коригування балансу',
+    commission: '0.00'
+  });
+
+  save();
+  render();
+});
   balanceEl.textContent=balance.toFixed(2);
   localStorage.setItem(AUTO_KEY,JSON.stringify({day:autoDayEl.value,amount:autoAmountEl.value,note:autoNoteEl.value}));
 }
